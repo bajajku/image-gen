@@ -18,7 +18,6 @@
     "@neondatabase/serverless": "^0.10.4",
     "@types/cors": "^2.8.17",
     "@types/express": "^5.0.1",
-    "aws-sdk": "^2.1692.0",
     "common": "*",
     "cors": "^2.8.5",
     "db": "*",

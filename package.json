@@ -7,8 +7,11 @@
     "lint": "turbo lint",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
     "start:web": "cd ./apps/web && npm run start",
-    "start:backend": "cd ./apps/backend && bun install && bun run index.ts",
-    "generate:db": "cd ./packages/db && npx prisma generate && cd ../.."
+    "build:backend": "cd ./apps/backend && bun build index.ts --outdir=dist --target=bun",
+    "start:backend": "cd ./apps/backend && bun run dist/index.js",
+    "start:backend:dev": "cd ./apps/backend && bun install && bun build index.ts --outdir=dist --target=bun && bun run dist/index.js",
+    "generate:db": "cd ./packages/db && npx prisma generate && cd ../..",
+    "render:build": "bun install && npm run generate:db && npm run build:backend"
   },
   "devDependencies": {
     "prettier": "^3.5.3",
