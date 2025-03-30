@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 // import Image from "next/image";
 import Link from "next/link";
+import { downloadImage, downloadAllImages } from '@/utils/downloadUtils';
 
 type Model = {
   id: string;
@@ -96,6 +97,22 @@ export default function GenerateImagesPage() {
         alert("Error generating images. Please try again.");
     } finally {
         setIsGenerating(false);
+    }
+  };
+
+  const handleDownload = async (imageUrl: string, index: number) => {
+    try {
+      await downloadImage(imageUrl, `generated-image-${index + 1}.png`);
+    } catch (error) {
+      alert('Failed to download image. Please try again.');
+    }
+  };
+
+  const handleDownloadAll = async () => {
+    try {
+      await downloadAllImages(generatedImages);
+    } catch (error) {
+      alert('Failed to download images. Please try again.');
     }
   };
 
@@ -225,20 +242,41 @@ export default function GenerateImagesPage() {
           )}
           
           {generatedImages.length > 0 && (
-            <div className="mt-4 grid grid-cols-2 gap-4">
-              {generatedImages.map((imageUrl, index) => (
-                <div key={index} className="relative">
-                  <img 
-                    src={imageUrl} 
-                    alt={`Generated ${index + 1}`} 
-                    className="w-full rounded-lg shadow-lg"
-                  />
-                  <div className="absolute top-2 right-2 bg-black bg-opacity-50 text-white px-2 py-1 rounded">
-                    {index + 1}/{generatedImages.length}
+            <>
+              <div className="mt-4 mb-4 flex justify-end">
+                {generatedImages.length > 1 && (
+                  <button
+                    onClick={handleDownloadAll}
+                    className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mr-2"
+                  >
+                    Download All Images
+                  </button>
+                )}
+              </div>
+
+              <div className="mt-4 grid grid-cols-2 gap-4">
+                {generatedImages.map((imageUrl, index) => (
+                  <div key={index} className="relative group">
+                    <img 
+                      src={imageUrl} 
+                      alt={`Generated ${index + 1}`} 
+                      className="w-full rounded-lg shadow-lg"
+                    />
+                    <div className="absolute top-2 right-2 bg-black bg-opacity-50 text-white px-2 py-1 rounded">
+                      {index + 1}/{generatedImages.length}
+                    </div>
+                    <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity bg-black bg-opacity-50 rounded-lg">
+                      <button
+                        onClick={() => handleDownload(imageUrl, index)}
+                        className="bg-white text-black px-4 py-2 rounded-lg hover:bg-gray-200 transition-colors"
+                      >
+                        Download
+                      </button>
+                    </div>
                   </div>
-                </div>
-              ))}
-            </div>
+                ))}
+              </div>
+            </>
           )}
         </div>
         
