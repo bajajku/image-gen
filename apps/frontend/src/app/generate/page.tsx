@@ -122,34 +122,49 @@ export default function GenerateImagesPage() {
 
   if (isLoading) {
     return (
-      <div className="container mx-auto px-4 py-8 max-w-lg text-center">
-        <p>Loading models...</p>
+      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-purple-50/30 to-indigo-50/30 dark:from-gray-900 dark:to-indigo-950">
+        <div className="glass p-8 rounded-xl shadow-xl max-w-md text-center">
+          <div className="w-16 h-16 mx-auto mb-4 animate-pulse">
+            <svg className="w-full h-full text-indigo-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+            </svg>
+          </div>
+          <p className="text-high-contrast text-lg">Loading models...</p>
+        </div>
       </div>
     );
   }
 
   if (error) {
     return (
-      <div className="container mx-auto px-4 py-8 max-w-lg text-center">
-        <p className="text-red-500">{error}</p>
+      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-purple-50/30 to-indigo-50/30 dark:from-gray-900 dark:to-indigo-950">
+        <div className="glass p-8 rounded-xl shadow-xl max-w-md text-center">
+          <div className="w-16 h-16 mx-auto mb-4">
+            <svg className="w-full h-full text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+            </svg>
+          </div>
+          <p className="text-red-500 text-lg font-medium">{error}</p>
+          <Link href="/" className="mt-4 inline-block px-4 py-2 rounded-lg bg-gradient-to-r from-indigo-600 to-purple-600 text-white">Go back home</Link>
+        </div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-50 to-indigo-50 dark:from-gray-900 dark:to-indigo-950 p-8">
+    <div className="min-h-screen bg-gradient-to-br from-purple-50/30 to-indigo-50/30 dark:from-gray-900 dark:to-indigo-950 p-8">
       <div className="container mx-auto px-4 py-8 max-w-xl">
         <div className="text-center mb-10">
-          <h1 className="text-3xl font-bold mb-2 text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-indigo-600 dark:from-purple-400 dark:to-indigo-400">
+          <h1 className="text-3xl font-bold mb-2 gradient-text">
             Generate Images
           </h1>
-          <p className="text-gray-600 dark:text-gray-300">Create stunning AI-generated images with your trained models</p>
+          <p className="text-high-contrast">Create stunning AI-generated images with your trained models</p>
         </div>
         
-        <div className="bg-white/90 dark:bg-gray-800/50 backdrop-blur-sm p-8 rounded-xl shadow-xl border border-purple-100 dark:border-purple-900">
+        <div className="glass p-8 rounded-xl shadow-xl border border-purple-100/50 dark:border-purple-900/50">
           <form onSubmit={handleGenerateImage} className="space-y-6">
             <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+              <label className="block text-sm font-medium text-high-contrast mb-2">
                 Select Model
               </label>
               <div className="relative">
@@ -157,7 +172,7 @@ export default function GenerateImagesPage() {
                   value={selectedModel}
                   onChange={handleModelChange}
                   required
-                  className="block w-full rounded-lg border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 shadow-sm focus:border-purple-500 focus:ring-purple-500 px-4 py-3 pr-10 appearance-none"
+                  className="block w-full rounded-lg border-gray-200 dark:border-gray-700 bg-white/80 dark:bg-gray-800/80 shadow-sm focus:border-purple-500 focus:ring-purple-500 px-4 py-3 pr-10 appearance-none text-high-contrast"
                 >
                   <option value="">Select a model</option>
                   {models.map((model) => (
@@ -167,7 +182,7 @@ export default function GenerateImagesPage() {
                   ))}
                 </select>
                 <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-3">
-                  <svg className="h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                  <svg className="h-5 w-5 text-high-contrast opacity-70" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
                     <path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd" />
                   </svg>
                 </div>
@@ -175,7 +190,7 @@ export default function GenerateImagesPage() {
             </div>
             
             <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+              <label className="block text-sm font-medium text-high-contrast mb-2">
                 Prompt
               </label>
               <div className="relative">
@@ -185,27 +200,27 @@ export default function GenerateImagesPage() {
                   required
                   rows={5}
                   placeholder="Describe the image you want to generate..."
-                  className="block w-full rounded-lg border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 shadow-sm focus:border-purple-500 focus:ring-purple-500 px-4 py-3"
+                  className="block w-full rounded-lg border-gray-200 dark:border-gray-700 bg-white/80 dark:bg-gray-800/80 shadow-sm focus:border-purple-500 focus:ring-purple-500 px-4 py-3 text-high-contrast"
                 />
-                <div className="absolute right-3 bottom-3 text-gray-400">
+                <div className="absolute right-3 bottom-3 text-high-contrast opacity-50">
                   <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
                     <path fillRule="evenodd" d="M18 10c0 3.866-3.582 7-8 7a8.841 8.841 0 01-4.083-.98L2 17l1.338-3.123C2.493 12.767 2 11.434 2 10c0-3.866 3.582-7 8-7s8 3.134 8 7zM7 9H5v2h2V9zm8 0h-2v2h2V9zM9 9h2v2H9V9z" clipRule="evenodd" />
                   </svg>
                 </div>
               </div>
-              <p className="mt-2 text-xs text-gray-500 dark:text-gray-400">
+              <p className="mt-2 text-xs text-high-contrast opacity-80">
                 Tip: Be specific about style, colors, and subject matter
               </p>
             </div>
             
             <div className="mb-4">
-              <label className="block text-sm font-medium text-gray-700">
+              <label className="block text-sm font-medium text-high-contrast mb-2">
                 Number of Images
               </label>
               <select
                 value={numImages}
                 onChange={(e) => setNumImages(Number(e.target.value))}
-                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm"
+                className="block w-full rounded-lg border-gray-200 dark:border-gray-700 bg-white/80 dark:bg-gray-800/80 shadow-sm focus:border-purple-500 focus:ring-purple-500 px-4 py-3 text-high-contrast"
               >
                 {[1, 2, 3, 4].map((num) => (
                   <option key={num} value={num}>
@@ -218,7 +233,7 @@ export default function GenerateImagesPage() {
             <button
               type="submit"
               disabled={isGenerating || !selectedModel || !prompt}
-              className="w-full py-3 px-4 rounded-lg shadow-lg text-sm font-medium text-white bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300 transform hover:-translate-y-1 disabled:hover:translate-y-0"
+              className="w-full py-3 px-4 rounded-lg shadow-lg text-sm font-medium text-white bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300 hover-lift disabled:hover:transform-none"
             >
               {isGenerating ? (
                 <span className="flex items-center justify-center">
@@ -242,76 +257,54 @@ export default function GenerateImagesPage() {
           {isGenerating && (
             <div className="mt-4">
               <div className="flex items-center space-x-2">
-                <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-blue-500"></div>
-                <p>{generationStatus}</p>
+                <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-purple-500"></div>
+                <p className="text-high-contrast">{generationStatus}</p>
               </div>
-              <div className="mt-2 h-2 bg-gray-200 rounded-full overflow-hidden">
-                <div className="h-full bg-blue-500 animate-pulse"></div>
+              <div className="mt-2 h-2 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden">
+                <div className="h-full bg-purple-500 animate-pulse"></div>
               </div>
             </div>
           )}
-          
-          {!isGenerating && generationStatus && (
-            <div className={`mt-4 p-4 rounded-lg ${
-              generationStatus.startsWith("Error") 
-                ? "bg-red-100 text-red-700" 
-                : "bg-green-100 text-green-700"
-            }`}>
-              {generationStatus}
-            </div>
-          )}
-          
-          {generatedImages.length > 0 && (
-            <>
-              <div className="mt-4 mb-4 flex justify-end">
-                {generatedImages.length > 1 && (
-                  <button
-                    onClick={handleDownloadAll}
-                    className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mr-2"
-                  >
-                    Download All Images
-                  </button>
-                )}
-              </div>
+        </div>
 
-              <div className="mt-4 grid grid-cols-2 gap-4">
-                {generatedImages.map((imageUrl, index) => (
-                  <div key={index} className="relative group">
+        {generatedImages.length > 0 && (
+          <div className="mt-8 glass p-8 rounded-xl shadow-xl border border-purple-100/50 dark:border-purple-900/50">
+            <div className="flex justify-between items-center mb-4">
+              <h2 className="text-xl font-semibold text-high-contrast">Generated Images</h2>
+              {generatedImages.length > 1 && (
+                <button
+                  onClick={handleDownloadAll}
+                  className="px-3 py-1 text-sm bg-indigo-100 dark:bg-indigo-900/50 text-indigo-700 dark:text-indigo-300 rounded-lg hover:bg-indigo-200 dark:hover:bg-indigo-800/50 transition-colors"
+                >
+                  Download All
+                </button>
+              )}
+            </div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+              {generatedImages.map((imageUrl, index) => (
+                <div key={index} className="relative group">
+                  <div className="aspect-square overflow-hidden rounded-lg">
                     <img 
                       src={imageUrl} 
-                      alt={`Generated ${index + 1}`} 
-                      className="w-full rounded-lg shadow-lg"
+                      alt={`Generated image ${index + 1}`} 
+                      className="w-full h-full object-cover rounded-lg hover:scale-105 transition-transform duration-300"
                     />
-                    <div className="absolute top-2 right-2 bg-black bg-opacity-50 text-white px-2 py-1 rounded">
-                      {index + 1}/{generatedImages.length}
-                    </div>
-                    <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity bg-black bg-opacity-50 rounded-lg">
-                      <button
-                        onClick={() => handleDownload(imageUrl, index)}
-                        className="bg-white text-black px-4 py-2 rounded-lg hover:bg-gray-200 transition-colors"
-                      >
-                        Download
-                      </button>
-                    </div>
                   </div>
-                ))}
-              </div>
-            </>
-          )}
-        </div>
-        
-        {/* Return to home button */}
-        <div className="mt-8 text-center">
-          <Link 
-            href="/" 
-            className="inline-flex items-center text-purple-600 dark:text-purple-400 hover:text-purple-800 dark:hover:text-purple-300 transition-colors"
-          >
-            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
-              <path fillRule="evenodd" d="M9.707 16.707a1 1 0 01-1.414 0l-6-6a1 1 0 010-1.414l6-6a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l4.293 4.293a1 1 0 010 1.414z" clipRule="evenodd" />
-            </svg>
-            Back to Home
-          </Link>
-        </div>
+                  <div className="absolute bottom-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                    <button
+                      onClick={() => handleDownload(imageUrl, index)}
+                      className="p-2 bg-white/80 dark:bg-gray-900/80 rounded-full shadow-lg text-indigo-600 dark:text-indigo-400 hover:text-indigo-800"
+                    >
+                      <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                      </svg>
+                    </button>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );

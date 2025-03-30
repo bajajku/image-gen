@@ -1,11 +1,168 @@
 @import "tailwindcss";
 
+/* Theme Variables */
 :root {
+  /* Default Theme */
   --background: #ffffff;
   --foreground: #171717;
-  --primary-gradient: linear-gradient(135deg, #6366f1 0%, #a855f7 100%);
-  --secondary-gradient: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
-  --accent-gradient: linear-gradient(135deg, #ec4899 0%, #8b5cf6 100%);
+  --primary-main: #6366f1;
+  --primary-light: #818cf8;
+  --primary-dark: #4f46e5;
+  --secondary-main: #a855f7;
+  --secondary-light: #c084fc;
+  --secondary-dark: #9333ea;
+  --accent-main: #ec4899;
+  --accent-light: #f472b6;
+  --accent-dark: #db2777;
+  --success: #10b981;
+  --warning: #f59e0b;
+  --error: #ef4444;
+  --info: #3b82f6;
+  --surface: #ffffff;
+  --surface-hover: #f9fafb;
+  --surface-dark: #f3f4f6;
+  --text-contrast-high: #111827;
+  --text-contrast-medium: #4b5563;
+  --text-contrast-low: #9ca3af;
+  --border: rgba(0, 0, 0, 0.1);
+  --shadow: rgba(0, 0, 0, 0.05);
+  
+  /* Common Gradients */
+  --primary-gradient: linear-gradient(135deg, var(--primary-main) 0%, var(--secondary-main) 100%);
+  --secondary-gradient: linear-gradient(135deg, var(--info) 0%, var(--secondary-main) 100%);
+  --accent-gradient: linear-gradient(135deg, var(--accent-main) 0%, var(--secondary-main) 100%);
+}
+
+/* Dark Theme */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+    --surface: #1f2937;
+    --surface-hover: #262f3d;
+    --surface-dark: #111827;
+    --text-contrast-high: #f9fafb;
+    --text-contrast-medium: #d1d5db;
+    --text-contrast-low: #6b7280;
+    --border: rgba(255, 255, 255, 0.1);
+    --shadow: rgba(0, 0, 0, 0.2);
+  }
+}
+
+/* Indigo Theme */
+.theme-indigo {
+  --primary-main: #6366f1;
+  --primary-light: #818cf8;
+  --primary-dark: #4f46e5;
+  --secondary-main: #8b5cf6;
+  --secondary-light: #a78bfa;
+  --secondary-dark: #7c3aed;
+  --accent-main: #3b82f6;
+  --accent-light: #60a5fa;
+  --accent-dark: #2563eb;
+  --primary-gradient: linear-gradient(135deg, var(--primary-main) 0%, var(--secondary-main) 100%);
+  --secondary-gradient: linear-gradient(135deg, var(--accent-main) 0%, var(--primary-main) 100%);
+  --accent-gradient: linear-gradient(135deg, var(--secondary-main) 0%, var(--primary-main) 100%);
+}
+
+/* Purple Theme */
+.theme-purple {
+  --primary-main: #a855f7;
+  --primary-light: #c084fc;
+  --primary-dark: #9333ea;
+  --secondary-main: #ec4899;
+  --secondary-light: #f472b6;
+  --secondary-dark: #db2777;
+  --accent-main: #8b5cf6;
+  --accent-light: #a78bfa;
+  --accent-dark: #7c3aed;
+  --primary-gradient: linear-gradient(135deg, var(--primary-main) 0%, var(--secondary-main) 100%);
+  --secondary-gradient: linear-gradient(135deg, var(--accent-main) 0%, var(--primary-main) 100%);
+  --accent-gradient: linear-gradient(135deg, var(--secondary-main) 0%, var(--primary-main) 100%);
+}
+
+/* Green Theme */
+.theme-green {
+  --primary-main: #10b981;
+  --primary-light: #34d399;
+  --primary-dark: #059669;
+  --secondary-main: #06b6d4;
+  --secondary-light: #22d3ee;
+  --secondary-dark: #0891b2;
+  --accent-main: #f59e0b;
+  --accent-light: #fbbf24;
+  --accent-dark: #d97706;
+  --primary-gradient: linear-gradient(135deg, var(--primary-main) 0%, var(--secondary-main) 100%);
+  --secondary-gradient: linear-gradient(135deg, var(--accent-main) 0%, var(--primary-main) 100%);
+  --accent-gradient: linear-gradient(135deg, var(--secondary-main) 0%, var(--primary-main) 100%);
+}
+
+/* Red Theme */
+.theme-red {
+  --primary-main: #ef4444;
+  --primary-light: #f87171;
+  --primary-dark: #dc2626;
+  --secondary-main: #f97316;
+  --secondary-light: #fb923c;
+  --secondary-dark: #ea580c;
+  --accent-main: #ec4899;
+  --accent-light: #f472b6;
+  --accent-dark: #db2777;
+  --primary-gradient: linear-gradient(135deg, var(--primary-main) 0%, var(--secondary-main) 100%);
+  --secondary-gradient: linear-gradient(135deg, var(--accent-main) 0%, var(--primary-main) 100%);
+  --accent-gradient: linear-gradient(135deg, var(--secondary-main) 0%, var(--primary-main) 100%);
+}
+
+/* Dark Indigo Theme */
+.theme-dark-indigo {
+  --background: #0f172a;
+  --foreground: #f8fafc;
+  --primary-main: #818cf8;
+  --primary-light: #a5b4fc;
+  --primary-dark: #6366f1;
+  --secondary-main: #a78bfa;
+  --secondary-light: #c4b5fd;
+  --secondary-dark: #8b5cf6;
+  --accent-main: #60a5fa;
+  --accent-light: #93c5fd;
+  --accent-dark: #3b82f6;
+  --surface: #1e293b;
+  --surface-hover: #334155;
+  --surface-dark: #0f172a;
+  --text-contrast-high: #f8fafc;
+  --text-contrast-medium: #cbd5e1;
+  --text-contrast-low: #64748b;
+  --border: rgba(255, 255, 255, 0.1);
+  --shadow: rgba(0, 0, 0, 0.3);
+  --primary-gradient: linear-gradient(135deg, var(--primary-main) 0%, var(--secondary-main) 100%);
+  --secondary-gradient: linear-gradient(135deg, var(--accent-main) 0%, var(--primary-main) 100%);
+  --accent-gradient: linear-gradient(135deg, var(--secondary-main) 0%, var(--primary-main) 100%);
+}
+
+/* Nord Theme */
+.theme-nord {
+  --background: #2e3440;
+  --foreground: #eceff4;
+  --primary-main: #88c0d0;
+  --primary-light: #8fbcbb;
+  --primary-dark: #81a1c1;
+  --secondary-main: #b48ead;
+  --secondary-light: #d8dee9;
+  --secondary-dark: #5e81ac;
+  --accent-main: #a3be8c;
+  --accent-light: #ebcb8b;
+  --accent-dark: #d08770;
+  --surface: #3b4252;
+  --surface-hover: #434c5e;
+  --surface-dark: #2e3440;
+  --text-contrast-high: #eceff4;
+  --text-contrast-medium: #e5e9f0;
+  --text-contrast-low: #d8dee9;
+  --border: rgba(236, 239, 244, 0.1);
+  --shadow: rgba(0, 0, 0, 0.3);
+  --primary-gradient: linear-gradient(135deg, var(--primary-main) 0%, var(--secondary-main) 100%);
+  --secondary-gradient: linear-gradient(135deg, var(--accent-main) 0%, var(--primary-main) 100%);
+  --accent-gradient: linear-gradient(135deg, var(--secondary-main) 0%, var(--primary-main) 100%);
 }
 
 @theme inline {
@@ -13,13 +170,6 @@
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
 }
 
 body {
@@ -52,6 +202,12 @@ body {
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+  /* Improved text readability with text shadow */
+  text-shadow: 0px 0px 1px rgba(0, 0, 0, 0.1);
+}
+
+.dark .gradient-text {
+  text-shadow: 0px 0px 2px rgba(0, 0, 0, 0.5);
 }
 
 .gradient-border {
@@ -134,4 +290,34 @@ body {
 
 .transition-colors {
   transition: background-color 0.3s ease-in-out;
+}
+
+/* High Contrast Text */
+.text-high-contrast {
+  color: var(--text-contrast-high);
+}
+
+.dark .text-high-contrast {
+  color: var(--text-contrast-high);
+}
+
+/* Theme Switcher Button */
+.theme-button {
+  background: var(--surface);
+  color: var(--text-contrast-medium);
+  border: 1px solid var(--border);
+  border-radius: 0.5rem;
+  padding: 0.5rem;
+  transition: all 0.2s ease-in-out;
+}
+
+.theme-button:hover {
+  background: var(--surface-hover);
+  color: var(--text-contrast-high);
+}
+
+.theme-button.active {
+  background: var(--primary-gradient);
+  color: white;
+  border: none;
 }

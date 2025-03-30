@@ -20,7 +20,7 @@ export default function Home() {
           <h1 className="text-6xl font-bold mb-6 gradient-text">
             AI Image Generator
           </h1>
-          <p className="text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto leading-relaxed">
+          <p className="text-xl text-high-contrast max-w-2xl mx-auto leading-relaxed">
             Transform your ideas into stunning visuals with our advanced AI image generation platform. Train custom models and create unique artwork in minutes.
           </p>
 
@@ -46,23 +46,23 @@ export default function Home() {
                   <div className="flex flex-col md:flex-row items-center gap-8">
                     <div className="flex-1">
                       <h3 className="text-2xl font-semibold mb-4 gradient-text">Train Your Custom Model</h3>
-                      <p className="text-gray-600 dark:text-gray-300 mb-6">
+                      <p className="text-high-contrast mb-6">
                         Upload your images and train a custom AI model that learns your unique style and preferences.
                       </p>
                       <ul className="space-y-3 mb-8">
-                        <li className="flex items-center text-gray-600 dark:text-gray-300">
+                        <li className="flex items-center text-high-contrast">
                           <svg className="w-5 h-5 mr-3 text-indigo-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
                           </svg>
                           Upload up to 30 high-quality images
                         </li>
-                        <li className="flex items-center text-gray-600 dark:text-gray-300">
+                        <li className="flex items-center text-high-contrast">
                           <svg className="w-5 h-5 mr-3 text-indigo-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
                           </svg>
                           Customize model parameters
                         </li>
-                        <li className="flex items-center text-gray-600 dark:text-gray-300">
+                        <li className="flex items-center text-high-contrast">
                           <svg className="w-5 h-5 mr-3 text-indigo-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
                           </svg>
@@ -97,23 +97,23 @@ export default function Home() {
                   <div className="flex flex-col md:flex-row items-center gap-8">
                     <div className="flex-1">
                       <h3 className="text-2xl font-semibold mb-4 gradient-text">Generate Amazing Images</h3>
-                      <p className="text-gray-600 dark:text-gray-300 mb-6">
+                      <p className="text-high-contrast mb-6">
                         Use your trained models to generate unique and creative images with simple text prompts.
                       </p>
                       <ul className="space-y-3 mb-8">
-                        <li className="flex items-center text-gray-600 dark:text-gray-300">
+                        <li className="flex items-center text-high-contrast">
                           <svg className="w-5 h-5 mr-3 text-purple-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
                           </svg>
                           Choose from your trained models
                         </li>
-                        <li className="flex items-center text-gray-600 dark:text-gray-300">
+                        <li className="flex items-center text-high-contrast">
                           <svg className="w-5 h-5 mr-3 text-purple-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
                           </svg>
                           Write creative prompts
                         </li>
-                        <li className="flex items-center text-gray-600 dark:text-gray-300">
+                        <li className="flex items-center text-high-contrast">
                           <svg className="w-5 h-5 mr-3 text-purple-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
                           </svg>
@@ -155,8 +155,8 @@ export default function Home() {
                 </svg>
               </div>
             </div>
-            <h3 className="text-xl font-semibold mb-4">Fast Training</h3>
-            <p className="text-gray-600 dark:text-gray-300">
+            <h3 className="text-xl font-semibold mb-4 text-high-contrast">Fast Training</h3>
+            <p className="text-high-contrast">
               Train your custom AI model in minutes with our optimized training pipeline.
             </p>
           </div>
@@ -169,8 +169,8 @@ export default function Home() {
                 </svg>
               </div>
             </div>
-            <h3 className="text-xl font-semibold mb-4">High Quality</h3>
-            <p className="text-gray-600 dark:text-gray-300">
+            <h3 className="text-xl font-semibold mb-4 text-high-contrast">High Quality</h3>
+            <p className="text-high-contrast">
               Generate stunning, high-resolution images that capture your unique style.
             </p>
           </div>
@@ -183,8 +183,8 @@ export default function Home() {
                 </svg>
               </div>
             </div>
-            <h3 className="text-xl font-semibold mb-4">Style Transfer</h3>
-            <p className="text-gray-600 dark:text-gray-300">
+            <h3 className="text-xl font-semibold mb-4 text-high-contrast">Style Transfer</h3>
+            <p className="text-high-contrast">
               Apply your unique artistic style to any image concept with our advanced AI models.
             </p>
           </div>
