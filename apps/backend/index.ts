@@ -24,7 +24,7 @@ app.use(
       origin: ["https://image-gen-tsws.onrender.com", "http://localhost:3000", "https://image-gen-frontend-36if.vercel.app"],
       credentials: true,
       methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
-      allowedHeaders: ["Content-Type", "Authorization"],
+      allowedHeaders: ["Content-Type", "Authorization", "Accept"],
     })
   );
   
