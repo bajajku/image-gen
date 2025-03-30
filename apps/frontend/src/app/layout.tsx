@@ -64,7 +64,7 @@ function Header() {
                 </svg>
               </div>
             </div>
-            <span className="font-bold text-xl gradient-text">AI Image Gen</span>
+            <span className="font-bold text-xl gradient-text">SynthLabel</span>
           </Link>
           
           <div className="flex items-center space-x-3">

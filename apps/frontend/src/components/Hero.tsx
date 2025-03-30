@@ -13,7 +13,7 @@ export const Hero = () => {
                     </div>
                 </div>
                 <h1 className="font-bold mb-6 gradient-text text-6xl/[92px]">
-                    Data Labeling Platform
+                    SynthLabel
                 </h1>
                 <p className="text-xl text-high-contrast max-w-2xl mx-auto leading-relaxed">
                     Your one-stop destination for efficient and accurate data labeling. Upload your images and get them labeled by our expert workforce.

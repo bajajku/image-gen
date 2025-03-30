@@ -27,7 +27,7 @@ export default function Home() {
             </div>
 
             <h1 className="font-bold mb-6 gradient-text text-6xl/[92px]">
-              AI Image Generator
+              SynthLabel
             </h1>
             <p className="text-xl text-high-contrast max-w-2xl mx-auto leading-relaxed">
               Transform your ideas into stunning visuals with our advanced AI image generation platform. Train custom models and create unique artwork in minutes.
@@ -202,7 +202,7 @@ export default function Home() {
         
         <footer className="max-w-6xl mx-auto mt-16 text-center">
           <div className="py-4 border-t border-indigo-100 dark:border-indigo-900/30">
-            <p className="text-high-contrast">AI Image Generator - Upload and train your own models</p>
+            <p className="text-high-contrast">SynthLabel - Upload and train your own models</p>
           </div>
         </footer>
       </div>
