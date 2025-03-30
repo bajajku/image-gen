@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import JSZip from "jszip";
 
@@ -19,7 +19,15 @@ export default function TrainModelPage() {
     primaryColor: "#000000"
   });
 
+  useEffect(() => {
+    alert("Training is currently disabled due to low funds. Please try again later.");
+  }, []);
+
   const handleImagesUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+    e.preventDefault();
+    alert("Training is currently disabled due to low funds. Please try again later.");
+    return;
+    
     const files = e.target.files;
     if (!files) return;
 
@@ -38,6 +46,9 @@ export default function TrainModelPage() {
   };
 
   const zipAndUploadImages = async () => {
+    alert("Training is currently disabled due to low funds. Please try again later.");
+    return;
+    
     if (images.length === 0) {
       alert("Please add at least one image");
       return;
@@ -107,6 +118,8 @@ export default function TrainModelPage() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    alert("Training is currently disabled due to low funds. Please try again later.");
+    return;
     
     if (!uploadedZipUrl) {
       alert("Please upload images first");
@@ -147,8 +160,18 @@ export default function TrainModelPage() {
       <div className="max-w-4xl mx-auto">
         <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-8">Train New AI Model</h1>
         
+        {/* Add notice banner */}
+        <div className="bg-amber-100 border-l-4 border-amber-500 text-amber-700 p-4 mb-8 rounded-md shadow-sm">
+          <div className="flex items-center">
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+            </svg>
+            <p className="font-medium">Training is currently disabled due to low funds. Please try again later.</p>
+          </div>
+        </div>
+        
         {/* Image Upload Section */}
-        <div className="bg-white/90 dark:bg-gray-800/50 backdrop-blur-sm p-8 rounded-xl shadow-xl border border-indigo-100 dark:border-indigo-900 transition-all hover:shadow-indigo-200/30 dark:hover:shadow-indigo-700/20 mb-8">
+        <div className="bg-white/90 dark:bg-gray-800/50 backdrop-blur-sm p-8 rounded-xl shadow-xl border border-indigo-100 dark:border-indigo-900 transition-all hover:shadow-indigo-200/30 dark:hover:shadow-indigo-700/20 mb-8 opacity-50 pointer-events-none">
           <h2 className="text-xl font-semibold text-gray-800 dark:text-white mb-4">Upload Training Images</h2>
           <p className="text-gray-700 dark:text-gray-300 mb-6">
             Upload up to 30 high-quality images to train your custom AI model.
@@ -219,7 +242,7 @@ export default function TrainModelPage() {
         </div>
 
         {/* Model Configuration Form */}
-        <div className="bg-white/90 dark:bg-gray-800/50 backdrop-blur-sm p-8 rounded-xl shadow-xl border border-indigo-100 dark:border-indigo-900 transition-all hover:shadow-indigo-200/30 dark:hover:shadow-indigo-700/20">
+        <div className="bg-white/90 dark:bg-gray-800/50 backdrop-blur-sm p-8 rounded-xl shadow-xl border border-indigo-100 dark:border-indigo-900 transition-all hover:shadow-indigo-200/30 dark:hover:shadow-indigo-700/20 opacity-50 pointer-events-none">
           <h2 className="text-xl font-semibold text-gray-800 dark:text-white mb-6">Model Configuration</h2>
           <form onSubmit={handleSubmit} className="space-y-6">
             <div className="grid grid-cols-2 gap-6">
