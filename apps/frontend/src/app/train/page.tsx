@@ -58,7 +58,7 @@ export default function TrainModelPage() {
       const zipFile = new File([zipContent], "training_images.zip", { type: "application/zip" });
 
       // Get pre-signed URL
-      const presignedRes = await fetch("http://localhost:8080/pre-signed-url", {
+      const presignedRes = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/pre-signed-url`, {
         method: "GET",
         headers: {
           "Accept": "application/json",
@@ -115,7 +115,7 @@ export default function TrainModelPage() {
 
     setIsTraining(true);
     try {
-        const response = await fetch("http://localhost:8080/ai/train", {
+        const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/ai/train`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

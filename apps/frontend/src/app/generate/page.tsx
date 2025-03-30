@@ -31,7 +31,7 @@ export default function GenerateImagesPage() {
     // Fetch available models
     const fetchModels = async () => {
       try {
-        const response = await fetch("http://localhost:8080/models");
+        const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/models`);
         
         if (!response.ok) {
           throw new Error("Failed to fetch models");
@@ -71,7 +71,7 @@ export default function GenerateImagesPage() {
     setGenerationStatus("Submitting generation request...");
     
     try {
-        const response = await fetch("http://localhost:8080/ai/generate", {
+        const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/ai/generate`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -108,7 +108,7 @@ export default function GenerateImagesPage() {
     try {
       await downloadImage(imageUrl, `generated-image-${index + 1}.png`);
     } catch (error) {
-      alert('Failed to download image. Please try again.');
+      alert(`Failed to download image. Please try again. ${error}`);
     }
   };
 
@@ -116,7 +116,7 @@ export default function GenerateImagesPage() {
     try {
       await downloadAllImages(generatedImages);
     } catch (error) {
-      alert('Failed to download images. Please try again.');
+      alert(`Failed to download images. Please try again. ${error}`);
     }
   };
 
