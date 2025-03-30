@@ -9,7 +9,6 @@ export class FalAIModel {
     console.log("Tensor path:", tensorPath);
     console.log("Number of images:", numImages);
 
-    console.log("process.env.WEBHOOK_BASE_URL", process.env.WEBHOOK_BASE_URL);
     const { request_id, response_url } = await fal.queue.submit(
       "fal-ai/flux-lora",
       {
@@ -22,24 +21,40 @@ export class FalAIModel {
       }
     );
 
-    await new Promise(resolve => setTimeout(resolve, 10000));
-    const status = await fal.queue.status("fal-ai/flux-lora", {
-      requestId: request_id,
-      logs: true,
-    });
-    console.log("status", status);
+    // Poll for result with exponential backoff
+    const maxAttempts = 10;
+    const initialDelay = 2000; // 2 seconds
+    let currentDelay = initialDelay;
 
-    const result = await fal.queue.result("fal-ai/flux-lora", {
-      requestId: request_id
-    });
-    console.log("result", result);
+    for (let attempt = 0; attempt < maxAttempts; attempt++) {
+      const status = await fal.queue.status("fal-ai/flux-lora", {
+        requestId: request_id,
+        logs: true,
+      });
 
-    const imageUrls = result?.data?.images?.map(img => img.url) || [];
-    if (imageUrls.length === 0) {
-        throw new Error("No image URLs in result");
+      if (status.status === "COMPLETED") {
+        const result = await fal.queue.result("fal-ai/flux-lora", {
+          requestId: request_id
+        });
+        
+        const imageUrls = result?.data?.images?.map(img => img.url) || [];
+        if (imageUrls.length === 0) {
+          throw new Error("No image URLs in result");
+        }
+        
+        return { request_id, response_url, imageUrls };
+      }
+
+      // if (status.status === "FAILED") {
+      //   throw new Error(`Image generation failed: ${status.error || "Unknown error"}`);
+      // }
+
+      // Wait with exponential backoff
+      await new Promise(resolve => setTimeout(resolve, currentDelay));
+      currentDelay = Math.min(currentDelay * 1.5, 10000); // Max 10 seconds between attempts
     }
 
-    return { request_id, response_url, imageUrls };
+    throw new Error("Timeout waiting for image generation");
   }
 
   public async trainModel(zipUrl: string, triggerWord: string) {

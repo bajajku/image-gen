@@ -25,6 +25,7 @@ export default function GenerateImagesPage() {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [numImages, setNumImages] = useState<number>(1);
+  const [generationStatus, setGenerationStatus] = useState<string>("");
 
   useEffect(() => {
     // Fetch available models
@@ -67,6 +68,7 @@ export default function GenerateImagesPage() {
     
     setIsGenerating(true);
     setGeneratedImages([]);
+    setGenerationStatus("Submitting generation request...");
     
     try {
         const response = await fetch("http://localhost:8080/ai/generate", {
@@ -88,12 +90,14 @@ export default function GenerateImagesPage() {
         const data = await response.json();
         
         if (data.imageUrls && data.imageUrls.length > 0) {
+            setGenerationStatus("Generation completed!");
             setGeneratedImages(data.imageUrls);
         } else {
             throw new Error("No image URLs returned");
         }
     } catch (error) {
         console.error("Generation error:", error);
+        setGenerationStatus("Error: " + (error as Error).message);
         alert("Error generating images. Please try again.");
     } finally {
         setIsGenerating(false);
@@ -237,7 +241,23 @@ export default function GenerateImagesPage() {
           
           {isGenerating && (
             <div className="mt-4">
-              <p>Generating {numImages} image{numImages > 1 ? 's' : ''}...</p>
+              <div className="flex items-center space-x-2">
+                <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-blue-500"></div>
+                <p>{generationStatus}</p>
+              </div>
+              <div className="mt-2 h-2 bg-gray-200 rounded-full overflow-hidden">
+                <div className="h-full bg-blue-500 animate-pulse"></div>
+              </div>
+            </div>
+          )}
+          
+          {!isGenerating && generationStatus && (
+            <div className={`mt-4 p-4 rounded-lg ${
+              generationStatus.startsWith("Error") 
+                ? "bg-red-100 text-red-700" 
+                : "bg-green-100 text-green-700"
+            }`}>
+              {generationStatus}
             </div>
           )}
           
