@@ -95,4 +95,4 @@ export const themeOptions = [
   { id: 'red', name: 'Red' },
   { id: 'dark-indigo', name: 'Dark Indigo' },
   { id: 'nord', name: 'Nord' },
-] as const; 
+] as const;

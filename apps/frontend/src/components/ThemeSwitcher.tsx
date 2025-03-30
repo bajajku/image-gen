@@ -97,4 +97,4 @@ function getThemePreviewColor(themeName: ThemeName): string {
     default:
       return 'linear-gradient(135deg, #6366f1, #a855f7)';
   }
-} 
+}
