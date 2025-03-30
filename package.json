@@ -7,7 +7,7 @@
     "lint": "turbo lint",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
     "start:web": "cd ./apps/web && npm run start",
-    "start:backend": "cd ./apps/backend && bun run index.ts",
+    "start:backend": "cd ./apps/backend && bun install && bun run index.ts",
     "generate:db": "cd ./packages/db && npx prisma generate && cd ../.."
   },
   "devDependencies": {
