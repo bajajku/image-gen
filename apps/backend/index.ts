@@ -27,6 +27,7 @@ app.use(
       allowedHeaders: ["Content-Type", "Authorization"],
     })
   );
+  
 const PORT = 8080;
 
 const falAiModel = new FalAIModel();
