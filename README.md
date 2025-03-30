@@ -1,84 +1,113 @@
-# Turborepo starter
+# SynthLabel Image Generation Application Architecture
 
-This Turborepo starter is maintained by the Turborepo core team.
+## System Overview
 
-## Using this example
+SynthLabel is an image generation application that allows users to generate images with AI models, train custom models, and manage image packs. It is built as a full-stack TypeScript application with a clear separation between frontend, backend, and shared packages. The project follows a modern microservices approach and is organized as a monorepo using Turborepo.
 
-Run the following command:
+## Monorepo Structure
 
-```sh
-npx create-turbo@latest
-```
+The project is structured as a Turborepo monorepo with the following components:
 
-## What's inside?
 
-This Turborepo includes the following packages/apps:
+## Technology Stack
 
-### Apps and Packages
+### Frontend (apps/web)
+- **Framework**: Next.js
+- **UI Components**: React 19
+- **Types**: TypeScript
+- **Styling**: CSS (likely with a framework, though not specified in provided code)
 
-- `docs`: a [Next.js](https://nextjs.org/) app
-- `web`: another [Next.js](https://nextjs.org/) app
-- `@repo/ui`: a stub React component library shared by both `web` and `docs` applications
-- `@repo/eslint-config`: `eslint` configurations (includes `eslint-config-next` and `eslint-config-prettier`)
-- `@repo/typescript-config`: `tsconfig.json`s used throughout the monorepo
+### Backend (apps/backend)
+- **Runtime**: Bun
+- **Framework**: Express.js
+- **Database ORM**: Prisma
+- **Types**: TypeScript
+- **AI Integration**: FalAI for image generation
 
-Each package/app is 100% [TypeScript](https://www.typescriptlang.org/).
+### Database
+- **Type**: PostgreSQL
+- **Hosting**: Neon (serverless Postgres)
+- **Schema Management**: Prisma
 
-### Utilities
+### Shared Packages
+- **db**: Prisma client and database utilities
+- **common**: Shared TypeScript types and utilities
+- **ui**: Shared React components
 
-This Turborepo has some additional tools already setup for you:
+### Infrastructure
+- **Containerization**: Docker
+- **Build System**: Turborepo
+- **Storage**: AWS S3 for image storage
+- **Authentication**: Clerk
 
-- [TypeScript](https://www.typescriptlang.org/) for static type checking
-- [ESLint](https://eslint.org/) for code linting
-- [Prettier](https://prettier.io) for code formatting
+## Data Flow Architecture
 
-### Build
+### 1. User Authentication:
+- Users authenticate via Clerk integration.
+- JWT tokens provide secure access to API endpoints.
 
-To build all apps and packages, run the following command:
+### 2. Image Generation Flow:
+- User submits a generation request via frontend.
+- Backend validates the request and passes it to the FalAI service.
+- Generated images are stored in S3.
+- Results are stored in the database and returned to the user.
 
-```
-cd my-turborepo
-pnpm build
-```
+### 3. Model Training Flow:
+- User uploads training data to create custom models.
+- Backend processes training requests.
+- Model training status is tracked in the database.
 
-### Develop
+## Key Components
 
-To develop all apps and packages, run the following command:
+### Database Schema
+The database includes models for:
+- **User**: User accounts and profile information.
+- **Model**: Custom AI models for image generation.
+- **OutputImages**: Generated images with their metadata.
+- **Various status enumerations** to track processing states.
 
-```
-cd my-turborepo
-pnpm dev
-```
+### API Services
+The backend Express application provides endpoints for:
+- Image generation
+- Model training
+- User management
+- Image pack creation and management
 
-### Remote Caching
+### Storage
+AWS S3 is used for storing:
+- Generated images
+- Training data
+- Other user-uploaded content
 
-> [!TIP]
-> Vercel Remote Cache is free for all plans. Get started today at [vercel.com](https://vercel.com/signup?/signup?utm_source=remote-cache-sdk&utm_campaign=free_remote_cache).
+## Deployment Architecture
 
-Turborepo can use a technique known as [Remote Caching](https://turbo.build/repo/docs/core-concepts/remote-caching) to share cache artifacts across machines, enabling you to share build caches with your team and CI/CD pipelines.
+The application is containerized with Docker:
+- Separate containers for frontend and backend.
+- Environment-specific configurations managed via environment variables.
+- Services communicate over an internal Docker network.
 
-By default, Turborepo will cache locally. To enable Remote Caching you will need an account with Vercel. If you don't have an account you can [create one](https://vercel.com/signup?utm_source=turborepo-examples), then enter the following commands:
+## Development Environment
+During development:
+- Frontend runs on port 3000.
+- Backend runs on port 8080.
 
-```
-cd my-turborepo
-npx turbo login
-```
+## Production Environment
+In production:
+- Docker containers are used for consistent deployment.
+- Environment variables control service configuration.
+- Database connection is secured with SSL.
 
-This will authenticate the Turborepo CLI with your [Vercel account](https://vercel.com/docs/concepts/personal-accounts/overview).
+## Security Architecture
+- **Authentication**: Clerk handles user authentication (Not in Production yet).
+- **Authorization**: JWT tokens control access to protected resources.
+- **Secrets Management**: Environment variables for sensitive credentials.
+- **Database Security**: SSL-protected database connections.
 
-Next, you can link your Turborepo to your Remote Cache by running the following command from the root of your Turborepo:
+## Future Considerations
+- Add comprehensive authentication middleware.
+- Implement additional AI model providers.
+- Scale services horizontally for increased load.
+- Add monitoring and observability solutions.
+- Enhance caching for improved performance.
 
-```
-npx turbo link
-```
-
-## Useful Links
-
-Learn more about the power of Turborepo:
-
-- [Tasks](https://turbo.build/repo/docs/core-concepts/monorepos/running-tasks)
-- [Caching](https://turbo.build/repo/docs/core-concepts/caching)
-- [Remote Caching](https://turbo.build/repo/docs/core-concepts/remote-caching)
-- [Filtering](https://turbo.build/repo/docs/core-concepts/monorepos/filtering)
-- [Configuration Options](https://turbo.build/repo/docs/reference/configuration)
-- [CLI Usage](https://turbo.build/repo/docs/reference/command-line-reference)
+This architecture provides a solid foundation for the image generation application, with a clean separation of concerns and the flexibility to scale individual components as needed.
