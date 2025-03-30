@@ -9,7 +9,7 @@ export function UploadImage({ onImageAdded, image }: {
 }) {
     const [uploading, setUploading] = useState(false);
 
-    async function onFileSelect(e: any) {
+    async function onFileSelect(e: React.ChangeEvent<HTMLInputElement>) {
         setUploading(true);
         try {
             const file = e.target.files[0];
@@ -31,7 +31,7 @@ export function UploadImage({ onImageAdded, image }: {
             formData.set("X-Amz-Algorithm", response.data.fields["X-Amz-Algorithm"]);
             formData.append("file", file);
             const awsResponse = await axios.post(presignedUrl, formData);
-
+            console.log(awsResponse)
             onImageAdded(`${CLOUDFRONT_URL}/${response.data.fields["key"]}`);
         } catch(e) {
             console.log(e)

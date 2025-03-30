@@ -1,5 +1,5 @@
 "use client";
-import type { Metadata } from "next";
+// import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Link from "next/link";
@@ -13,7 +13,7 @@ import { BACKEND_URL } from '@/utils';
 import { ConnectionProvider, WalletProvider } from '@solana/wallet-adapter-react';
 import { WalletAdapterNetwork } from '@solana/wallet-adapter-base';
 import { WalletModalProvider } from '@solana/wallet-adapter-react-ui';
-import { clusterApiUrl } from '@solana/web3.js';
+// import { clusterApiUrl } from '@solana/web3.js';
 
 // Default styles that can be overridden by your app
 import('@solana/wallet-adapter-react-ui/styles.css');

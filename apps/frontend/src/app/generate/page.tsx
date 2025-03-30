@@ -108,7 +108,7 @@ export default function GenerateImagesPage() {
     try {
       await downloadImage(imageUrl, `generated-image-${index + 1}.png`);
     } catch (error) {
-      alert('Failed to download image. Please try again.');
+      alert(`Failed to download image. Please try again. ${error}`);
     }
   };
 
@@ -116,7 +116,7 @@ export default function GenerateImagesPage() {
     try {
       await downloadAllImages(generatedImages);
     } catch (error) {
-      alert('Failed to download images. Please try again.');
+      alert(`Failed to download images. Please try again. ${error}`);
     }
   };
 
