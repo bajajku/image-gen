@@ -1,5 +1,4 @@
 "use client"
-import { Appbar } from '@/components/Appbar';
 import { BACKEND_URL } from '@/utils';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
