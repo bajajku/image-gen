@@ -15,9 +15,11 @@ export const TrainModel = z.object({
 export const GenerateImage = z.object({
     prompt: z.string(),
     modelId: z.string(),
+    numImages: z.number()
 });
 
 export const GenerateImagesFromPack = z.object({
     modelId: z.string(),
-    packId: z.string()
+    packId: z.string(),
+    numImages: z.number()
 })

@@ -4,9 +4,10 @@ import { BaseModel } from "./BaseModel";
 export class FalAIModel {
   constructor() {}
 
-  public async generateImage(prompt: string, tensorPath: string) {
+  public async generateImage(prompt: string, tensorPath: string, numImages: number) {
     console.log("Generating image with prompt:", prompt);
     console.log("Tensor path:", tensorPath);
+    console.log("Number of images:", numImages);
 
     console.log("process.env.WEBHOOK_BASE_URL", process.env.WEBHOOK_BASE_URL);
     const { request_id, response_url } = await fal.queue.submit(
@@ -14,6 +15,7 @@ export class FalAIModel {
       {
         input: {
           prompt: prompt,
+          num_images: numImages,
           loras: [{ path: tensorPath, scale: 1 }],
         },
         webhookUrl: `${process.env.WEBHOOK_BASE_URL}/fal-ai/webhook/image`,
@@ -32,12 +34,12 @@ export class FalAIModel {
     });
     console.log("result", result);
 
-    const imageUrl = result?.data?.images?.[0]?.url;
-    if (!imageUrl) {
-        throw new Error("No image URL in result");
+    const imageUrls = result?.data?.images?.map(img => img.url) || [];
+    if (imageUrls.length === 0) {
+        throw new Error("No image URLs in result");
     }
 
-    return { request_id, response_url, imageUrl };
+    return { request_id, response_url, imageUrls };
   }
 
   public async trainModel(zipUrl: string, triggerWord: string) {

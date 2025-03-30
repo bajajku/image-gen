@@ -106,30 +106,36 @@ app.post("/ai/generate", async (req, res) => {
     }
 
     try {
-        const { request_id, response_url, imageUrl } = await falAiModel.generateImage(
+        const { request_id, response_url, imageUrls } = await falAiModel.generateImage(
             parsedBody.data.prompt,
-            model.tensorPath
+            model.tensorPath,
+            parsedBody.data.numImages
         );
 
-        const data = await prisma.outputImages.create({
-            data: {
-                prompt: parsedBody.data.prompt,
-                modelId: parsedBody.data.modelId,
-                userId: USER_ID,
-                falAiRequestId: request_id,
-                status: "Generated",
-                imageUrl: imageUrl,
-            }
-        });
+        // Create multiple output image records
+        const outputImages = await Promise.all(
+            imageUrls.map(imageUrl =>
+                prisma.outputImages.create({
+                    data: {
+                        prompt: parsedBody.data.prompt,
+                        modelId: parsedBody.data.modelId,
+                        userId: USER_ID,
+                        falAiRequestId: request_id,
+                        status: "Generated",
+                        imageUrl: imageUrl,
+                    }
+                })
+            )
+        );
 
         res.json({
-            imageUrl: imageUrl,
+            imageUrls,
             requestId: request_id
         });
     } catch (error) {
-        console.error("Error generating image:", error);
+        console.error("Error generating images:", error);
         res.status(500).json({
-            message: "Failed to generate image"
+            message: "Failed to generate images"
         });
     }
 });
@@ -166,7 +172,7 @@ app.post("/pack/generate", async (req, res) => {
 
     let requestIds: { request_id: string }[] = await Promise.all(
         prompts.map((prompt) =>
-            falAiModel.generateImage(prompt.prompt, model.tensorPath!)
+            falAiModel.generateImage(prompt.prompt, model.tensorPath!, parsedBody.data.numImages)
         )
     );
 

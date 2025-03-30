@@ -20,9 +20,10 @@ export default function GenerateImagesPage() {
   const [selectedModel, setSelectedModel] = useState<string>("");
   const [prompt, setPrompt] = useState<string>("");
   const [isGenerating, setIsGenerating] = useState(false);
-  const [generatedImage, setGeneratedImage] = useState<string | null>(null);
+  const [generatedImages, setGeneratedImages] = useState<string[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [numImages, setNumImages] = useState<number>(1);
 
   useEffect(() => {
     // Fetch available models
@@ -59,41 +60,42 @@ export default function GenerateImagesPage() {
     e.preventDefault();
     
     if (!selectedModel || !prompt) {
-      alert("Please select a model and enter a prompt");
-      return;
+        alert("Please select a model and enter a prompt");
+        return;
     }
     
     setIsGenerating(true);
-    setGeneratedImage(null);
+    setGeneratedImages([]);
     
     try {
-      const response = await fetch("http://localhost:8080/ai/generate", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          modelId: selectedModel,
-          prompt: prompt,
-        }),
-      });
-      
-      if (!response.ok) {
-        throw new Error(`Failed to generate image: ${response.statusText}`);
-      }
-      
-      const data = await response.json();
-      
-      if (data.imageUrl) {
-        setGeneratedImage(data.imageUrl);
-      } else {
-        throw new Error("No image URL returned");
-      }
+        const response = await fetch("http://localhost:8080/ai/generate", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                modelId: selectedModel,
+                prompt: prompt,
+                numImages: numImages
+            }),
+        });
+        
+        if (!response.ok) {
+            throw new Error(`Failed to generate images: ${response.statusText}`);
+        }
+        
+        const data = await response.json();
+        
+        if (data.imageUrls && data.imageUrls.length > 0) {
+            setGeneratedImages(data.imageUrls);
+        } else {
+            throw new Error("No image URLs returned");
+        }
     } catch (error) {
-      console.error("Generation error:", error);
-      alert("Error generating image. Please try again.");
+        console.error("Generation error:", error);
+        alert("Error generating images. Please try again.");
     } finally {
-      setIsGenerating(false);
+        setIsGenerating(false);
     }
   };
 
@@ -175,6 +177,23 @@ export default function GenerateImagesPage() {
               </p>
             </div>
             
+            <div className="mb-4">
+              <label className="block text-sm font-medium text-gray-700">
+                Number of Images
+              </label>
+              <select
+                value={numImages}
+                onChange={(e) => setNumImages(Number(e.target.value))}
+                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm"
+              >
+                {[1, 2, 3, 4].map((num) => (
+                  <option key={num} value={num}>
+                    {num} {num === 1 ? 'Image' : 'Images'}
+                  </option>
+                ))}
+              </select>
+            </div>
+            
             <button
               type="submit"
               disabled={isGenerating || !selectedModel || !prompt}
@@ -201,17 +220,24 @@ export default function GenerateImagesPage() {
           
           {isGenerating && (
             <div className="mt-4">
-                <p>Generating image...</p>
+              <p>Generating {numImages} image{numImages > 1 ? 's' : ''}...</p>
             </div>
           )}
           
-          {generatedImage && (
-            <div className="mt-4">
-                <img 
-                    src={generatedImage} 
-                    alt="Generated" 
-                    className="max-w-full rounded-lg shadow-lg"
-                />
+          {generatedImages.length > 0 && (
+            <div className="mt-4 grid grid-cols-2 gap-4">
+              {generatedImages.map((imageUrl, index) => (
+                <div key={index} className="relative">
+                  <img 
+                    src={imageUrl} 
+                    alt={`Generated ${index + 1}`} 
+                    className="w-full rounded-lg shadow-lg"
+                  />
+                  <div className="absolute top-2 right-2 bg-black bg-opacity-50 text-white px-2 py-1 rounded">
+                    {index + 1}/{generatedImages.length}
+                  </div>
+                </div>
+              ))}
             </div>
           )}
         </div>
