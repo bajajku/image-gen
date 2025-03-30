@@ -79,7 +79,7 @@ export default function GenerateImagesPage() {
       });
       
       if (!response.ok) {
-        throw new Error("Failed to generate image");
+        throw new Error(`Failed to generate image: ${response.statusText}`);
       }
       
       const data = await response.json();
@@ -199,7 +199,21 @@ export default function GenerateImagesPage() {
             </button>
           </form>
           
-          {/* Result display would go here */}
+          {isGenerating && (
+            <div className="mt-4">
+                <p>Generating image...</p>
+            </div>
+          )}
+          
+          {generatedImage && (
+            <div className="mt-4">
+                <img 
+                    src={generatedImage} 
+                    alt="Generated" 
+                    className="max-w-full rounded-lg shadow-lg"
+                />
+            </div>
+          )}
         </div>
         
         {/* Return to home button */}

@@ -5,6 +5,10 @@ export class FalAIModel {
   constructor() {}
 
   public async generateImage(prompt: string, tensorPath: string) {
+    console.log("Generating image with prompt:", prompt);
+    console.log("Tensor path:", tensorPath);
+
+    console.log("process.env.WEBHOOK_BASE_URL", process.env.WEBHOOK_BASE_URL);
     const { request_id, response_url } = await fal.queue.submit(
       "fal-ai/flux-lora",
       {
@@ -16,7 +20,24 @@ export class FalAIModel {
       }
     );
 
-    return { request_id, response_url };
+    await new Promise(resolve => setTimeout(resolve, 10000));
+    const status = await fal.queue.status("fal-ai/flux-lora", {
+      requestId: request_id,
+      logs: true,
+    });
+    console.log("status", status);
+
+    const result = await fal.queue.result("fal-ai/flux-lora", {
+      requestId: request_id
+    });
+    console.log("result", result);
+
+    const imageUrl = result?.data?.images?.[0]?.url;
+    if (!imageUrl) {
+        throw new Error("No image URL in result");
+    }
+
+    return { request_id, response_url, imageUrl };
   }
 
   public async trainModel(zipUrl: string, triggerWord: string) {

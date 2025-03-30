@@ -15,7 +15,9 @@ dotenv.config();
 
 const app = express();
 
-const USER_ID = "random-user-id";
+// const USER_ID = "random-user-id";
+const USER_ID = "test-user";
+
 app.use(express.json() );
 app.use(
     cors({
@@ -103,24 +105,33 @@ app.post("/ai/generate", async (req, res) => {
         return;
     }
 
-    const { request_id, response_url } = await falAiModel.generateImage(
-        parsedBody.data.prompt,
-        model.tensorPath
-    );
+    try {
+        const { request_id, response_url, imageUrl } = await falAiModel.generateImage(
+            parsedBody.data.prompt,
+            model.tensorPath
+        );
 
-    const data = await prisma.outputImages.create({
-        data: {
-            prompt: parsedBody.data.prompt,
-            userId: USER_ID,
-            modelId: parsedBody.data.modelId,
-            imageUrl: "",
-            falAiRequestId: request_id,
-        },
-    });
+        const data = await prisma.outputImages.create({
+            data: {
+                prompt: parsedBody.data.prompt,
+                modelId: parsedBody.data.modelId,
+                userId: USER_ID,
+                falAiRequestId: request_id,
+                status: "Generated",
+                imageUrl: imageUrl,
+            }
+        });
 
-    res.json({
-        imageId: data.id,
-    });
+        res.json({
+            imageUrl: imageUrl,
+            requestId: request_id
+        });
+    } catch (error) {
+        console.error("Error generating image:", error);
+        res.status(500).json({
+            message: "Failed to generate image"
+        });
+    }
 });
 
 app.post("/pack/generate", async (req, res) => {
