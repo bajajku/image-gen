@@ -3,8 +3,8 @@
 /* Theme Variables */
 :root {
   /* Default Theme */
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #fafafa;
+  --foreground: #1a1a1a;
   --primary-main: #6366f1;
   --primary-light: #818cf8;
   --primary-dark: #4f46e5;
@@ -19,13 +19,13 @@
   --error: #ef4444;
   --info: #3b82f6;
   --surface: #ffffff;
-  --surface-hover: #f9fafb;
-  --surface-dark: #f3f4f6;
-  --text-contrast-high: #111827;
-  --text-contrast-medium: #4b5563;
-  --text-contrast-low: #9ca3af;
-  --border: rgba(0, 0, 0, 0.1);
-  --shadow: rgba(0, 0, 0, 0.05);
+  --surface-hover: #f3f4f6;
+  --surface-dark: #e5e7eb;
+  --text-contrast-high: #0f172a;
+  --text-contrast-medium: #374151;
+  --text-contrast-low: #6b7280;
+  --border: rgba(0, 0, 0, 0.12);
+  --shadow: rgba(0, 0, 0, 0.08);
   
   /* Common Gradients */
   --primary-gradient: linear-gradient(135deg, var(--primary-main) 0%, var(--secondary-main) 100%);
@@ -239,8 +239,9 @@ body {
 /* Glass Effect */
 .glass {
   backdrop-filter: blur(16px) saturate(180%);
-  background-color: rgba(255, 255, 255, 0.7);
-  border: 1px solid rgba(255, 255, 255, 0.125);
+  background-color: rgba(255, 255, 255, 0.8);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
 }
 
 .dark .glass {

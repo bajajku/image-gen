@@ -26,7 +26,7 @@ export default function Home() {
               </div>
             </div>
 
-            <h1 className="text-6xl font-bold mb-6 gradient-text">
+            <h1 className="font-bold mb-6 gradient-text text-6xl/[92px]">
               AI Image Generator
             </h1>
             <p className="text-xl text-high-contrast max-w-2xl mx-auto leading-relaxed">
