@@ -3,111 +3,190 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-indigo-50 to-purple-50 dark:from-gray-900 dark:to-indigo-950 p-8 pb-20 sm:p-20">
-      <main className="max-w-6xl mx-auto flex flex-col gap-8">
-        <div className="flex flex-col items-center w-full mb-10">
-          <div className="relative">
-            <h1 className="text-5xl font-bold mb-4 text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-purple-600 dark:from-indigo-400 dark:to-purple-400 text-center">
-              AI Image Generator
-            </h1>
-            <div className="absolute -bottom-3 left-1/2 transform -translate-x-1/2 w-24 h-1 bg-gradient-to-r from-indigo-600 to-purple-600 rounded-full"></div>
+    <div className="min-h-screen bg-gradient-to-br from-indigo-50/30 via-purple-50/30 to-pink-50/30 dark:from-gray-900 dark:via-indigo-950 dark:to-purple-950 py-16 px-4">
+      <main className="max-w-6xl mx-auto">
+        <div className="flex flex-col items-center text-center mb-16">
+          <div className="relative mb-6 floating">
+            <div className="absolute -inset-1 bg-gradient-to-r from-indigo-600 to-purple-600 rounded-lg blur opacity-30 group-hover:opacity-100 transition duration-1000 group-hover:duration-200"></div>
+            <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-indigo-600 to-purple-600 p-0.5 shadow-lg">
+              <div className="w-full h-full rounded-xl bg-white dark:bg-gray-900 flex items-center justify-center">
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-transparent bg-clip-text bg-gradient-to-br from-indigo-600 to-purple-600" viewBox="0 0 20 20" fill="currentColor">
+                  <path fillRule="evenodd" d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z" clipRule="evenodd" />
+                </svg>
+              </div>
+            </div>
           </div>
-          <p className="text-lg mb-8 text-gray-600 dark:text-gray-300 mt-6 text-center max-w-xl">
-            Train your own AI model and generate stunning custom images with just a few clicks
+
+          <h1 className="text-6xl font-bold mb-6 gradient-text">
+            AI Image Generator
+          </h1>
+          <p className="text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto leading-relaxed">
+            Transform your ideas into stunning visuals with our advanced AI image generation platform. Train custom models and create unique artwork in minutes.
           </p>
-          
-          <div className="w-full max-w-lg">
+
+          <div className="mt-12 w-full max-w-3xl">
             <Tabs defaultValue="train" className="w-full">
-              <TabsList className="grid w-full grid-cols-2 rounded-xl p-1 bg-white/80 dark:bg-gray-800/50 backdrop-blur-sm shadow-lg">
+              <TabsList className="grid w-full grid-cols-2 rounded-2xl p-1 glass">
                 <TabsTrigger 
                   value="train" 
-                  className="data-[state=active]:bg-indigo-600 data-[state=active]:text-white rounded-lg py-3 transition-all duration-300"
+                  className="data-[state=active]:bg-gradient-to-r data-[state=active]:from-indigo-600 data-[state=active]:to-indigo-700 data-[state=active]:text-white rounded-xl py-4 transition-all duration-300 hover-lift"
                 >
                   Train New Model
                 </TabsTrigger>
                 <TabsTrigger 
                   value="generate" 
-                  className="data-[state=active]:bg-purple-600 data-[state=active]:text-white rounded-lg py-3 transition-all duration-300"
+                  className="data-[state=active]:bg-gradient-to-r data-[state=active]:from-purple-600 data-[state=active]:to-purple-700 data-[state=active]:text-white rounded-xl py-4 transition-all duration-300 hover-lift"
                 >
                   Generate Images
                 </TabsTrigger>
               </TabsList>
-              
-              <TabsContent value="train" className="mt-8">
-                <div className="bg-white/90 dark:bg-gray-800/50 backdrop-blur-sm p-8 rounded-xl shadow-xl border border-indigo-100 dark:border-indigo-900 transition-all hover:shadow-indigo-200/30 dark:hover:shadow-indigo-700/20">
-                  <p className="mb-6 text-gray-700 dark:text-gray-300">Upload images to train your custom AI model with your own style and content</p>
-                  <Link 
-                    href="/train" 
-                    className="rounded-xl transition-all flex items-center justify-center bg-gradient-to-r from-indigo-600 to-indigo-700 hover:from-indigo-700 hover:to-indigo-800 text-white gap-2 font-medium text-base h-14 px-6 w-full text-center shadow-lg shadow-indigo-600/20 hover:shadow-indigo-600/40"
-                  >
-                    <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" />
-                    </svg>
-                    Train New Model
-                  </Link>
+
+              <TabsContent value="train">
+                <div className="mt-6 glass rounded-2xl p-8 hover-lift">
+                  <div className="flex flex-col md:flex-row items-center gap-8">
+                    <div className="flex-1">
+                      <h3 className="text-2xl font-semibold mb-4 gradient-text">Train Your Custom Model</h3>
+                      <p className="text-gray-600 dark:text-gray-300 mb-6">
+                        Upload your images and train a custom AI model that learns your unique style and preferences.
+                      </p>
+                      <ul className="space-y-3 mb-8">
+                        <li className="flex items-center text-gray-600 dark:text-gray-300">
+                          <svg className="w-5 h-5 mr-3 text-indigo-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
+                          </svg>
+                          Upload up to 30 high-quality images
+                        </li>
+                        <li className="flex items-center text-gray-600 dark:text-gray-300">
+                          <svg className="w-5 h-5 mr-3 text-indigo-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
+                          </svg>
+                          Customize model parameters
+                        </li>
+                        <li className="flex items-center text-gray-600 dark:text-gray-300">
+                          <svg className="w-5 h-5 mr-3 text-indigo-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
+                          </svg>
+                          Train in minutes
+                        </li>
+                      </ul>
+                      <Link 
+                        href="/train" 
+                        className="inline-flex items-center px-6 py-3 rounded-xl bg-gradient-to-r from-indigo-600 to-indigo-700 hover:from-indigo-700 hover:to-indigo-800 text-white font-medium transition-all hover-lift"
+                      >
+                        Start Training
+                        <svg className="ml-2 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+                        </svg>
+                      </Link>
+                    </div>
+                    <div className="w-full md:w-1/2 aspect-square rounded-xl bg-gradient-to-br from-indigo-100 to-purple-100 dark:from-indigo-900/30 dark:to-purple-900/30 p-6 flex items-center justify-center">
+                      <div className="relative w-full h-full">
+                        <div className="absolute inset-0 flex items-center justify-center">
+                          <svg className="w-24 h-24 text-indigo-500 animate-pulse" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                          </svg>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </TabsContent>
-              
-              <TabsContent value="generate" className="mt-8">
-                <div className="bg-white/90 dark:bg-gray-800/50 backdrop-blur-sm p-8 rounded-xl shadow-xl border border-purple-100 dark:border-purple-900 transition-all hover:shadow-purple-200/30 dark:hover:shadow-purple-700/20">
-                  <p className="mb-6 text-gray-700 dark:text-gray-300">Create stunning images with your trained AI models using simple text prompts</p>
-                  <Link 
-                    href="/generate" 
-                    className="rounded-xl transition-all flex items-center justify-center bg-gradient-to-r from-purple-600 to-purple-700 hover:from-purple-700 hover:to-purple-800 text-white gap-2 font-medium text-base h-14 px-6 w-full text-center shadow-lg shadow-purple-600/20 hover:shadow-purple-600/40"
-                  >
-                    <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                    </svg>
-                    Generate Images
-                  </Link>
+
+              <TabsContent value="generate">
+                <div className="mt-6 glass rounded-2xl p-8 hover-lift">
+                  <div className="flex flex-col md:flex-row items-center gap-8">
+                    <div className="flex-1">
+                      <h3 className="text-2xl font-semibold mb-4 gradient-text">Generate Amazing Images</h3>
+                      <p className="text-gray-600 dark:text-gray-300 mb-6">
+                        Use your trained models to generate unique and creative images with simple text prompts.
+                      </p>
+                      <ul className="space-y-3 mb-8">
+                        <li className="flex items-center text-gray-600 dark:text-gray-300">
+                          <svg className="w-5 h-5 mr-3 text-purple-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
+                          </svg>
+                          Choose from your trained models
+                        </li>
+                        <li className="flex items-center text-gray-600 dark:text-gray-300">
+                          <svg className="w-5 h-5 mr-3 text-purple-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
+                          </svg>
+                          Write creative prompts
+                        </li>
+                        <li className="flex items-center text-gray-600 dark:text-gray-300">
+                          <svg className="w-5 h-5 mr-3 text-purple-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
+                          </svg>
+                          Generate multiple variations
+                        </li>
+                      </ul>
+                      <Link 
+                        href="/generate" 
+                        className="inline-flex items-center px-6 py-3 rounded-xl bg-gradient-to-r from-purple-600 to-purple-700 hover:from-purple-700 hover:to-purple-800 text-white font-medium transition-all hover-lift"
+                      >
+                        Start Generating
+                        <svg className="ml-2 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+                        </svg>
+                      </Link>
+                    </div>
+                    <div className="w-full md:w-1/2 aspect-square rounded-xl bg-gradient-to-br from-purple-100 to-pink-100 dark:from-purple-900/30 dark:to-pink-900/30 p-6 flex items-center justify-center">
+                      <div className="relative w-full h-full">
+                        <div className="absolute inset-0 flex items-center justify-center">
+                          <svg className="w-24 h-24 text-purple-500 animate-pulse" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                          </svg>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </TabsContent>
             </Tabs>
           </div>
         </div>
 
-        {/* Visual divider with decorative elements */}
-        <div className="relative w-full flex items-center justify-center my-6">
-          <div className="absolute left-0 w-1/3 h-px bg-gradient-to-r from-transparent to-indigo-300 dark:to-indigo-700"></div>
-          <div className="w-12 h-12 bg-white dark:bg-gray-800 rounded-full flex items-center justify-center z-10 shadow-md">
-            <div className="w-6 h-6 bg-gradient-to-br from-indigo-500 to-purple-500 rounded-full"></div>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-16">
+          <div className="glass rounded-2xl p-8 hover-lift">
+            <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-indigo-600 to-purple-600 p-0.5 mb-6">
+              <div className="w-full h-full rounded-lg bg-white dark:bg-gray-900 flex items-center justify-center">
+                <svg className="w-6 h-6 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                </svg>
+              </div>
+            </div>
+            <h3 className="text-xl font-semibold mb-4">Fast Training</h3>
+            <p className="text-gray-600 dark:text-gray-300">
+              Train your custom AI model in minutes with our optimized training pipeline.
+            </p>
           </div>
-          <div className="absolute right-0 w-1/3 h-px bg-gradient-to-l from-transparent to-purple-300 dark:to-purple-700"></div>
-        </div>
 
-        <div className="w-full grid grid-cols-1 md:grid-cols-2 gap-8 mt-4">
-          <div className="bg-white/80 dark:bg-gray-800/40 p-8 rounded-xl shadow-lg border border-indigo-100 dark:border-indigo-900/50 transition-all duration-300 hover:shadow-xl hover:transform hover:-translate-y-1">
-            <div className="flex items-center mb-4">
-              <div className="w-10 h-10 rounded-lg bg-indigo-100 dark:bg-indigo-900/50 flex items-center justify-center mr-3">
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-indigo-600 dark:text-indigo-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+          <div className="glass rounded-2xl p-8 hover-lift">
+            <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-purple-600 to-pink-600 p-0.5 mb-6">
+              <div className="w-full h-full rounded-lg bg-white dark:bg-gray-900 flex items-center justify-center">
+                <svg className="w-6 h-6 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
                 </svg>
               </div>
-              <h2 className="text-xl font-semibold text-gray-800 dark:text-white">How it works</h2>
             </div>
-            <ol className="list-decimal pl-8 space-y-3 text-gray-700 dark:text-gray-300">
-              <li className="transition-all duration-200 hover:text-indigo-600 dark:hover:text-indigo-400">Upload a ZIP file with training images</li>
-              <li className="transition-all duration-200 hover:text-indigo-600 dark:hover:text-indigo-400">Configure your model settings</li>
-              <li className="transition-all duration-200 hover:text-indigo-600 dark:hover:text-indigo-400">Start training your AI model</li>
-              <li className="transition-all duration-200 hover:text-indigo-600 dark:hover:text-indigo-400">Generate custom images with your trained model</li>
-            </ol>
+            <h3 className="text-xl font-semibold mb-4">High Quality</h3>
+            <p className="text-gray-600 dark:text-gray-300">
+              Generate stunning, high-resolution images that capture your unique style.
+            </p>
           </div>
-          
-          <div className="bg-white/80 dark:bg-gray-800/40 p-8 rounded-xl shadow-lg border border-purple-100 dark:border-purple-900/50 transition-all duration-300 hover:shadow-xl hover:transform hover:-translate-y-1">
-            <div className="flex items-center mb-4">
-              <div className="w-10 h-10 rounded-lg bg-purple-100 dark:bg-purple-900/50 flex items-center justify-center mr-3">
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-purple-600 dark:text-purple-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
+
+          <div className="glass rounded-2xl p-8 hover-lift md:col-span-2 lg:col-span-1">
+            <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-pink-600 to-red-600 p-0.5 mb-6">
+              <div className="w-full h-full rounded-lg bg-white dark:bg-gray-900 flex items-center justify-center">
+                <svg className="w-6 h-6 text-pink-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 11c0 3.517-1.009 6.799-2.753 9.571m-3.44-2.04l.054-.09A13.916 13.916 0 008 11a4 4 0 118 0c0 1.017-.07 2.019-.203 3m-2.118 6.844A21.88 21.88 0 0015.171 17m3.839 1.132c.645-2.266.99-4.659.99-7.132A8 8 0 008 4.07M3 15.364c.64-1.319 1-2.8 1-4.364 0-1.457.39-2.823 1.07-4"></path>
                 </svg>
               </div>
-              <h2 className="text-xl font-semibold text-gray-800 dark:text-white">Tips for best results</h2>
             </div>
-            <ul className="list-disc pl-8 space-y-3 text-gray-700 dark:text-gray-300">
-              <li className="transition-all duration-200 hover:text-purple-600 dark:hover:text-purple-400">Use high-quality, consistent images</li>
-              <li className="transition-all duration-200 hover:text-purple-600 dark:hover:text-purple-400">Include at least 10-20 images in your training set</li>
-              <li className="transition-all duration-200 hover:text-purple-600 dark:hover:text-purple-400">Choose clear, descriptive prompts for generation</li>
-              <li className="transition-all duration-200 hover:text-purple-600 dark:hover:text-purple-400">Experiment with different settings</li>
-            </ul>
+            <h3 className="text-xl font-semibold mb-4">Style Transfer</h3>
+            <p className="text-gray-600 dark:text-gray-300">
+              Apply your unique artistic style to any image concept with our advanced AI models.
+            </p>
           </div>
         </div>
       </main>
