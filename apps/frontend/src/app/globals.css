@@ -2,9 +2,9 @@
 
 /* Theme Variables */
 :root {
-  /* Default Theme */
-  --background: #fafafa;
-  --foreground: #1a1a1a;
+  /* Default Theme (now using dark mode values) */
+  --background: #0a0a0a;
+  --foreground: #ededed;
   --primary-main: #6366f1;
   --primary-light: #818cf8;
   --primary-dark: #4f46e5;
@@ -18,35 +18,19 @@
   --warning: #f59e0b;
   --error: #ef4444;
   --info: #3b82f6;
-  --surface: #ffffff;
-  --surface-hover: #f3f4f6;
-  --surface-dark: #e5e7eb;
-  --text-contrast-high: #0f172a;
-  --text-contrast-medium: #374151;
+  --surface: #1f2937;
+  --surface-hover: #262f3d;
+  --surface-dark: #111827;
+  --text-contrast-high: #f9fafb;
+  --text-contrast-medium: #d1d5db;
   --text-contrast-low: #6b7280;
-  --border: rgba(0, 0, 0, 0.12);
-  --shadow: rgba(0, 0, 0, 0.08);
+  --border: rgba(255, 255, 255, 0.1);
+  --shadow: rgba(0, 0, 0, 0.2);
   
   /* Common Gradients */
   --primary-gradient: linear-gradient(135deg, var(--primary-main) 0%, var(--secondary-main) 100%);
   --secondary-gradient: linear-gradient(135deg, var(--info) 0%, var(--secondary-main) 100%);
   --accent-gradient: linear-gradient(135deg, var(--accent-main) 0%, var(--secondary-main) 100%);
-}
-
-/* Dark Theme */
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-    --surface: #1f2937;
-    --surface-hover: #262f3d;
-    --surface-dark: #111827;
-    --text-contrast-high: #f9fafb;
-    --text-contrast-medium: #d1d5db;
-    --text-contrast-low: #6b7280;
-    --border: rgba(255, 255, 255, 0.1);
-    --shadow: rgba(0, 0, 0, 0.2);
-  }
 }
 
 /* Indigo Theme */
@@ -203,10 +187,6 @@ body {
   -webkit-text-fill-color: transparent;
   background-clip: text;
   /* Improved text readability with text shadow */
-  text-shadow: 0px 0px 1px rgba(0, 0, 0, 0.1);
-}
-
-.dark .gradient-text {
   text-shadow: 0px 0px 2px rgba(0, 0, 0, 0.5);
 }
 

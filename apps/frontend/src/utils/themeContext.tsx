@@ -27,7 +27,8 @@ interface ThemeProviderProps {
 export const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
   // Initialize theme from localStorage or default to 'default'
   const [currentTheme, setCurrentTheme] = useState<ThemeName>('default');
-  const [isDarkMode, setIsDarkMode] = useState<boolean>(false);
+  // Always start with dark mode enabled
+  const [isDarkMode, setIsDarkMode] = useState<boolean>(true);
 
   useEffect(() => {
     // Initialize theme from localStorage if available
@@ -36,14 +37,12 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
       setCurrentTheme(savedTheme);
     }
     
-    // Check for dark mode preference
-    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    // Check for dark mode preference from localStorage
     const savedDarkMode = localStorage.getItem('darkMode');
     
+    // Always default to dark mode, only check saved preference
     if (savedDarkMode !== null) {
       setIsDarkMode(savedDarkMode === 'true');
-    } else {
-      setIsDarkMode(prefersDark);
     }
   }, []);
 
@@ -56,12 +55,8 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
       document.body.classList.add(`theme-${currentTheme}`);
     }
     
-    // Add dark mode class if enabled
-    if (isDarkMode) {
-      document.body.classList.add('dark');
-    } else {
-      document.body.classList.remove('dark');
-    }
+    // Always add dark mode class, as light mode is removed
+    document.body.classList.add('dark');
     
     // Save preferences to localStorage
     localStorage.setItem('theme', currentTheme);
